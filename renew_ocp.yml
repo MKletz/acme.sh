@@ -1,0 +1,10 @@
+---
+- name: Renew OCP certs
+  hosts: localhost
+  vars:
+    LE_API: 'api.ocp.mikemitchell.info'
+    LE_WILDCARD: 'apps.ocp.mikemitchell.info%'
+
+  tasks:
+    - name: Set challenge mode for Achme.sh
+      ansible.builtin.shell: 'acme.sh --issue -d {{ LE_API }} -d *.{{ LE_WILDCARD }} --dns dns_cf'
